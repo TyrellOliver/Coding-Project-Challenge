@@ -3,7 +3,10 @@ import "./App.css";
 
 function App() {
   const [playerChoice, setPlayerChoice] = useState("");
+  const [comChoice, setComChoice] = useState("");
+
   const [gameResult, setGameResult] = useState("");
+
   const [playerScore, setPlayerScore] = useState(0);
   const [comScore, setComScore] = useState(0);
 
@@ -12,14 +15,15 @@ function App() {
   };
 
   console.log(playerChoice);
+  // console.log(comChoice);
 
   const rockPaperScissors = () => {
-    // console.log(playerChoice);
     const choices = ["rock", "paper", "scissors"];
     const computer = choices[Math.floor(Math.random() * 3)];
-    console.log(computer);
+    setComChoice(computer);
 
-    // let userScore = 0
+    // How come console logging comChoice within the function doesn't log to the console
+    console.log(computer);
 
     if (
       (playerChoice === "rock" && computer === "scissors") ||
@@ -29,29 +33,18 @@ function App() {
       // playerScore++;
       // setPlayerScore(playerScore + 1);
       setPlayerScore((currPlayerScore) => currPlayerScore + 1);
-      // console.log(
-      //   `Game number: ${i + 1} You Win! Player Score: ${
-      //     scoreBoard.playerScore
-      //   }, Computer Score: ${scoreBoard.comScore}`
-      // );
       console.log("You win!");
       setGameResult("You win!");
     } else if (playerChoice === computer) {
-      // console.log(`Game number: ${i + 1} Draw!`);
       console.log("Draw!");
       setGameResult("Draw!");
     } else {
       setComScore((currComScore) => currComScore + 1);
-      // console.log(
-      //   `Game number: ${i + 1} You Lose! Player Score: ${
-      //     scoreBoard.playerScore
-      //   }, Computer Score: ${scoreBoard.comScore}`
-      // );
       console.log("You Lose!");
       setGameResult("You Lose!");
     }
   };
-  // console.log(rockPaperScissors(playerChoice));
+  console.log(comChoice);
 
   return (
     <>
@@ -59,6 +52,7 @@ function App() {
       <h3>{gameResult}</h3>
       <h3>{playerScore}</h3>
       <h3>{comScore}</h3>
+      <h3>{comChoice}</h3>
       <br />
       <div className="choices">
         <p className="choice one" data-choice="rock" onClick={handleOnCLick}>
