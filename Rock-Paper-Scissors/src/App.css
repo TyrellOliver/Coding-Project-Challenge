@@ -5,17 +5,19 @@
   text-align: center;
 }
 
-.score {
-  /* border: 2px solid red; */
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  top: 0px;
+.playerScore {
+  position: absolute;
+  left: 80px;
+}
+
+.computerScore{
+  position: absolute;
+  right: 80px;
 }
 
 .choices {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .choice {

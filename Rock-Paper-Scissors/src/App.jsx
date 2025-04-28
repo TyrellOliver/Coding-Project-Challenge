@@ -48,8 +48,12 @@ function App() {
 
   return (
     <>
-      <div className="score">
+      <div className="playerScore">
+        <p>Player Score:</p>
         <h3>{playerScore}</h3>
+      </div>
+      <div className="computerScore">
+        <p>Computer Score:</p>
         <h3>{comScore}</h3>
       </div>
       <h1>Rock, Paper, Scissors Game</h1>
