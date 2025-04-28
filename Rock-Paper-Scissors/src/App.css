@@ -5,6 +5,14 @@
   text-align: center;
 }
 
+.score {
+  /* border: 2px solid red; */
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  top: 0px;
+}
+
 .choices {
   display: flex;
   justify-content: space-between;
