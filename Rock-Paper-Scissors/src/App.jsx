@@ -4,9 +4,7 @@ import "./App.css";
 function App() {
   const [playerChoice, setPlayerChoice] = useState("");
   const [comChoice, setComChoice] = useState("");
-
   const [gameResult, setGameResult] = useState("");
-
   const [playerScore, setPlayerScore] = useState(0);
   const [comScore, setComScore] = useState(0);
 
@@ -61,16 +59,27 @@ function App() {
       <h3>{comChoice}</h3>
       <br />
       <div className="choices">
-        <p className="choice one" data-choice="rock" onClick={handleOnCLick}>
+        <p
+          className="choice one"
+          data-choice="rock"
+          onClick={handleOnCLick}
+          style={{ color: playerChoice === "rock" ? "red" : "black" }}
+        >
           Rock
         </p>
-        <p className="choice two" data-choice="paper" onClick={handleOnCLick}>
+        <p
+          className="choice two"
+          data-choice="paper"
+          onClick={handleOnCLick}
+          style={{ color: playerChoice === "paper" ? "red" : "black" }}
+        >
           Paper
         </p>
         <p
           className="choice three"
           data-choice="scissors"
           onClick={handleOnCLick}
+          style={{ color: playerChoice === "scissors" ? "red" : "black" }}
         >
           Scissors
         </p>

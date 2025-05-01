@@ -21,7 +21,7 @@
 }
 
 .choice {
-  color: black;
+  /* color: black; */
   border: 1px solid black;
   cursor: pointer;
   padding: 5px;
@@ -29,5 +29,5 @@
 }
 
 .choice:hover {
-  color: #4d4d4d;
+  color: #99a3a4;
 }
