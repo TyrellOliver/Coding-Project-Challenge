@@ -12,18 +12,15 @@ function App() {
   const [comScore, setComScore] = useState(0);
 
   const handleOnCLick = (event) => {
-    setPlayerChoice(event.target.dataset.choice);
-    // setPlayerChoice((prev) => {
-    //   console.log(prev);
-    //   event.target.dataset.choice;
-    // });
+    if (event.target.dataset.choice === playerChoice) {
+      setPlayerChoice("");
+    } else {
+      setPlayerChoice(event.target.dataset.choice);
+    }
   };
 
   console.log(playerChoice);
-  // console.log(comChoice);
-  console.log(rock);
-  console.log(paper);
-  console.log(scissors);
+  console.log(comChoice);
 
   const rockPaperScissors = () => {
     const choices = ["rock", "paper", "scissors"];
@@ -52,7 +49,6 @@ function App() {
       setGameResult("You Lose!");
     }
   };
-  console.log(comChoice);
 
   return (
     <>
@@ -68,8 +64,12 @@ function App() {
       <h3>{gameResult}</h3>
       <h3>{comChoice}</h3>
       <br />
-      <img src={rock} alt="image of a rock" />
       <div className="choices">
+        {playerChoice === "rock" ? (
+          <img src={rock} alt="image of a rock" />
+        ) : (
+          ""
+        )}
         <p
           className="choice one"
           data-choice="rock"
@@ -78,6 +78,11 @@ function App() {
         >
           Rock
         </p>
+        {playerChoice === "paper" ? (
+          <img src={paper} alt="image of a paper" />
+        ) : (
+          ""
+        )}
         <p
           className="choice two"
           data-choice="paper"
@@ -86,6 +91,11 @@ function App() {
         >
           Paper
         </p>
+        {playerChoice === "scissors" ? (
+          <img src={scissors} alt="image of a scissors" />
+        ) : (
+          ""
+        )}
         <p
           className="choice three"
           data-choice="scissors"
