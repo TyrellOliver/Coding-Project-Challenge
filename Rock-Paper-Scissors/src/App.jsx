@@ -1,4 +1,7 @@
 import { useState } from "react";
+import rock from "./assets/Rock.png";
+import paper from "./assets/Paper.png";
+import scissors from "./assets/Scissors.png";
 import "./App.css";
 
 function App() {
@@ -10,10 +13,17 @@ function App() {
 
   const handleOnCLick = (event) => {
     setPlayerChoice(event.target.dataset.choice);
+    // setPlayerChoice((prev) => {
+    //   console.log(prev);
+    //   event.target.dataset.choice;
+    // });
   };
 
   console.log(playerChoice);
   // console.log(comChoice);
+  console.log(rock);
+  console.log(paper);
+  console.log(scissors);
 
   const rockPaperScissors = () => {
     const choices = ["rock", "paper", "scissors"];
@@ -58,6 +68,7 @@ function App() {
       <h3>{gameResult}</h3>
       <h3>{comChoice}</h3>
       <br />
+      <img src={rock} alt="image of a rock" />
       <div className="choices">
         <p
           className="choice one"
