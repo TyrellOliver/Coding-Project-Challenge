@@ -12,11 +12,9 @@ function App() {
   const [comScore, setComScore] = useState(0);
 
   const handleOnCLick = (event) => {
-    if (event.target.dataset.choice === playerChoice) {
-      setPlayerChoice("");
-    } else {
-      setPlayerChoice(event.target.dataset.choice);
-    }
+    event.target.dataset.choice === playerChoice
+      ? setPlayerChoice("")
+      : setPlayerChoice(event.target.dataset.choice);
   };
 
   console.log(playerChoice);
