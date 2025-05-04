@@ -28,6 +28,10 @@ function App() {
     // How come console logging comChoice within the function doesn't log to the console
     console.log(computer);
 
+    if (playerChoice === "") {
+      return;
+    }
+
     if (
       (playerChoice === "rock" && computer === "scissors") ||
       (playerChoice === "paper" && computer === "rock") ||
@@ -62,12 +66,18 @@ function App() {
       <h3>{gameResult}</h3>
       <h3>{comChoice}</h3>
       <br />
+      {playerChoice === "rock" ? <img src={rock} alt="image of a rock" /> : ""}
+      {playerChoice === "paper" ? (
+        <img src={paper} alt="image of a paper" />
+      ) : (
+        ""
+      )}
+      {playerChoice === "scissors" ? (
+        <img src={scissors} alt="image of a scissors" />
+      ) : (
+        ""
+      )}
       <div className="choices">
-        {playerChoice === "rock" ? (
-          <img src={rock} alt="image of a rock" />
-        ) : (
-          ""
-        )}
         <p
           className="choice one"
           data-choice="rock"
@@ -76,11 +86,6 @@ function App() {
         >
           Rock
         </p>
-        {playerChoice === "paper" ? (
-          <img src={paper} alt="image of a paper" />
-        ) : (
-          ""
-        )}
         <p
           className="choice two"
           data-choice="paper"
@@ -89,11 +94,6 @@ function App() {
         >
           Paper
         </p>
-        {playerChoice === "scissors" ? (
-          <img src={scissors} alt="image of a scissors" />
-        ) : (
-          ""
-        )}
         <p
           className="choice three"
           data-choice="scissors"
