@@ -104,7 +104,7 @@ function App() {
         </p>
       </div>
       <br />
-      <button onClick={rockPaperScissors}>Go!</button>
+      <button onClick={rockPaperScissors}>Go!!</button>
     </>
   );
 }
