@@ -4,7 +4,7 @@ const API = import.meta.env.VITE_API_KEY;
 const type = "movie";
 const SEARCH_TERM_TO_CHANGE_LATER = "batman";
 
-const Search = () => {
+const Search = ({ watchlist, handleOnClick }) => {
   const [movies, setMovies] = useState([]);
 
   const fetchData = () => {
@@ -26,12 +26,21 @@ const Search = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
   return (
     <div className="search">
       <h1>Movies</h1>
+      <h2>{watchlist.length}</h2>
       {movies.map((movie) => (
         <div key={movie.imdbID}>
           <h3>{movie.Title}</h3>
+          <button
+            onClick={() => {
+              handleOnClick(movie);
+            }}
+          >
+            Add to watchlist
+          </button>
         </div>
       ))}
     </div>
