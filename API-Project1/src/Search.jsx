@@ -4,7 +4,7 @@ const API = import.meta.env.VITE_API_KEY;
 const type = "movie";
 const SEARCH_TERM_TO_CHANGE_LATER = "batman";
 
-const Search = ({ watchlist, handleOnClick }) => {
+const Search = ({ watchlist, handleAddToWatchlist }) => {
   const [movies, setMovies] = useState([]);
 
   const fetchData = () => {
@@ -14,7 +14,7 @@ const Search = ({ watchlist, handleOnClick }) => {
       )
         .then((res) => res.json())
         .then((data) => {
-          console.log(data.Search);
+        //   console.log(data.Search);
           setMovies(data.Search);
         });
     } catch (error) {
@@ -33,10 +33,11 @@ const Search = ({ watchlist, handleOnClick }) => {
       <h2>{watchlist.length}</h2>
       {movies.map((movie) => (
         <div key={movie.imdbID}>
+            {console.log(movie)}
           <h3>{movie.Title}</h3>
           <button
             onClick={() => {
-              handleOnClick(movie);
+              handleAddToWatchlist(movie);
             }}
           >
             Add to watchlist
