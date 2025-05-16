@@ -12,10 +12,11 @@ function App() {
     if (watchlist.some((mov) => mov.imdbID === movie.imdbID)) {
       setWatchlist(watchlist.filter((mov) => mov.imdbID !== movie.imdbID));
     } else {
-      setWatchlist([...watchlist, movie]);
+      // setWatchlist([...watchlist, movie]);
+      setWatchlist((prev) => [...prev, movie]);
     }
   }
-  console.log(watchlist);
+  console.log("The watchlist", watchlist);
   return (
     <>
       <Router>

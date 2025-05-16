@@ -14,7 +14,7 @@ const Search = ({ watchlist, handleAddToWatchlist }) => {
       )
         .then((res) => res.json())
         .then((data) => {
-        //   console.log(data.Search);
+          //   console.log(data.Search);
           setMovies(data.Search);
         });
     } catch (error) {
@@ -33,14 +33,16 @@ const Search = ({ watchlist, handleAddToWatchlist }) => {
       <h2>{watchlist.length}</h2>
       {movies.map((movie) => (
         <div key={movie.imdbID}>
-            {console.log(movie)}
+          {/* {console.log(movie)} */}
           <h3>{movie.Title}</h3>
           <button
             onClick={() => {
               handleAddToWatchlist(movie);
             }}
           >
-            Add to watchlist
+            {watchlist.some((ele) => ele.imdbID === movie.imdbID)
+              ? "Remove from watchlist"
+              : "Add to watchlist"}
           </button>
         </div>
       ))}
