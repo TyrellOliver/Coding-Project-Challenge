@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+import Movie from "./Movie";
+
 const API = import.meta.env.VITE_API_KEY;
 const type = "movie";
 const SEARCH_TERM_TO_CHANGE_LATER = "batman";
 
-const Search = ({ watchlist, handleAddToWatchlist }) => {
+const Search = ({ watchlist, handleWatchlistToggle }) => {
   const [movies, setMovies] = useState([]);
 
   const fetchData = () => {
@@ -32,24 +34,17 @@ const Search = ({ watchlist, handleAddToWatchlist }) => {
     <div className="search">
       <h1>Movies</h1>
       <h2>{watchlist.length}</h2>
-      <Link to={"/watchlist"}>
-        <button>My Watchlist</button>
-      </Link>
-      {movies.map((movie) => (
-        <div key={movie.imdbID}>
-          {/* {console.log(movie)} */}
-          <h3>{movie.Title}</h3>
-          <button
-            onClick={() => {
-              handleAddToWatchlist(movie);
-            }}
-          >
-            {watchlist.some((ele) => ele.imdbID === movie.imdbID)
-              ? "Remove from watchlist"
-              : "Add to watchlist"}
-          </button>
-        </div>
-      ))}
+      <Link to={"/watchlist"}>My Watchlist</Link>
+      {movies.map((movie) => {
+        return (
+          <Movie
+            key={movie.imdbID}
+            movie={movie}
+            watchlist={watchlist}
+            handleWatchlistToggle={handleWatchlistToggle}
+          />
+        );
+      })}
     </div>
   );
 };

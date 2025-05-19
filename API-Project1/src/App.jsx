@@ -8,7 +8,7 @@ import Watchlist from "./WatchList";
 function App() {
   const [watchlist, setWatchlist] = useState([]);
 
-  function handleAddToWatchlist(movie) {
+  function handleWatchlistToggle(movie) {
     if (watchlist.some((mov) => mov.imdbID === movie.imdbID)) {
       setWatchlist(watchlist.filter((mov) => mov.imdbID !== movie.imdbID));
     } else {
@@ -16,7 +16,7 @@ function App() {
       setWatchlist((prev) => [...prev, movie]);
     }
   }
-  console.log("The watchlist", watchlist);
+  // console.log("The watchlist", watchlist);
   return (
     <>
       <Router>
@@ -27,7 +27,7 @@ function App() {
               element={
                 <Search
                   watchlist={watchlist}
-                  handleAddToWatchlist={handleAddToWatchlist}
+                  handleWatchlistToggle={handleWatchlistToggle}
                 />
               }
             />
