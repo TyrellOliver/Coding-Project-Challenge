@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const API = import.meta.env.VITE_API_KEY;
 const type = "movie";
@@ -31,6 +32,9 @@ const Search = ({ watchlist, handleAddToWatchlist }) => {
     <div className="search">
       <h1>Movies</h1>
       <h2>{watchlist.length}</h2>
+      <Link to={"/watchlist"}>
+        <button>My Watchlist</button>
+      </Link>
       {movies.map((movie) => (
         <div key={movie.imdbID}>
           {/* {console.log(movie)} */}
