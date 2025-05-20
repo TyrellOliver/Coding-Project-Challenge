@@ -5,16 +5,22 @@ import Movie from "./Movie";
 
 const API = import.meta.env.VITE_API_KEY;
 const type = "movie";
-const SEARCH_TERM_TO_CHANGE_LATER = "batman";
 
 const Search = ({ watchlist, handleWatchlistToggle }) => {
   const [movies, setMovies] = useState([]);
+  const [search, setSearch] = useState("");
 
-  const fetchData = () => {
+  const handleTextChange = (event) => {
+    setSearch(event.target.value);
+  };
+
+  const handleButtonClick = () => {
+    fetchData(search);
+  };
+
+  const fetchData = (search) => {
     try {
-      fetch(
-        `http://www.omdbapi.com/?apikey=${API}&s=${SEARCH_TERM_TO_CHANGE_LATER}&type=${type}`
-      )
+      fetch(`http://www.omdbapi.com/?apikey=${API}&s=${search}&type=${type}`)
         .then((res) => res.json())
         .then((data) => {
           //   console.log(data.Search);
@@ -26,14 +32,24 @@ const Search = ({ watchlist, handleWatchlistToggle }) => {
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   return (
     <div className="search">
       <h1>Movies</h1>
+      <input
+        type="text"
+        placeholder="Search For Movie..."
+        id="searchInput"
+        value={search}
+        onChange={handleTextChange}
+        onKeyDown={(e) => e.key === "Enter" && handleButtonClick()}
+      />
+      <button onClick={handleButtonClick}>Submit</button>
       <h2>{watchlist.length}</h2>
+      <br />
       <Link to={"/watchlist"}>My Watchlist</Link>
       {movies.map((movie) => {
         return (
