@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 import Search from "./Search";
@@ -7,6 +7,7 @@ import Watchlist from "./WatchList";
 
 function App() {
   const [watchlist, setWatchlist] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   function handleWatchlistToggle(movie) {
     if (watchlist.some((mov) => mov.imdbID === movie.imdbID)) {
@@ -16,7 +17,19 @@ function App() {
       setWatchlist((prev) => [...prev, movie]);
     }
   }
+
+  useEffect(() => {
+    const savedWatchlist = localStorage.getItem("watchlistData");
+    if (savedWatchlist) {
+      setWatchlist(JSON.parse(savedWatchlist));
+    }
+    setIsLoaded(true);
+  }, []);
+
   // console.log("The watchlist", watchlist);
+
+  if (!isLoaded) return <p>Loading...</p>;
+
   return (
     <>
       <Router>

@@ -15,7 +15,7 @@ const Search = ({ watchlist, handleWatchlistToggle }) => {
   };
 
   const handleButtonClick = () => {
-    fetchData(search);
+    search ? fetchData(search) : "";
   };
 
   const fetchData = (search) => {
@@ -32,9 +32,9 @@ const Search = ({ watchlist, handleWatchlistToggle }) => {
     }
   };
 
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
+  useEffect(() => {
+    localStorage.setItem("watchlistData", JSON.stringify(watchlist));
+  }, [watchlist]);
 
   return (
     <div className="search">
