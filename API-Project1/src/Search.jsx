@@ -51,16 +51,18 @@ const Search = ({ watchlist, handleWatchlistToggle }) => {
       <h2>{watchlist.length}</h2>
       <br />
       <Link to={"/watchlist"}>My Watchlist</Link>
-      {movies.map((movie) => {
-        return (
-          <Movie
-            key={movie.imdbID}
-            movie={movie}
-            watchlist={watchlist}
-            handleWatchlistToggle={handleWatchlistToggle}
-          />
-        );
-      })}
+      <div className="movie_container">
+        {movies.map((movie) => {
+          return (
+            <Movie
+              key={movie.imdbID}
+              movie={movie}
+              watchlist={watchlist}
+              handleWatchlistToggle={handleWatchlistToggle}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };
