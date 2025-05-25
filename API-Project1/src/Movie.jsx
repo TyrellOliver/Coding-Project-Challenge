@@ -12,20 +12,22 @@ const Movie = ({ movie, watchlist, handleWatchlistToggle }) => {
           alt={`Poster for ${movie.Title}`}
         />
       </div>
-      <h3 className="movie_title">{movie.Title}</h3>
-      <h3 className="movie_year">{movie.Year}</h3>
-      <button
-        className="movie_watchlist_button"
-        onClick={() => {
-          handleWatchlistToggle(movie);
-        }}
-      >
-        {watchlist.some((mov) => mov.imdbID === movie.imdbID) ? (
-          <FaBookmark className="watchlist_icon" />
-        ) : (
-          <FaRegBookmark className="watchlist_icon" />
-        )}
-      </button>
+      <div className="description_wrapper">
+        <h3 className="movie_title">{movie.Title}</h3>
+        <h3 className="movie_year">{movie.Year}</h3>
+        <button
+          className="movie_watchlist_button"
+          onClick={() => {
+            handleWatchlistToggle(movie);
+          }}
+        >
+          {watchlist.some((mov) => mov.imdbID === movie.imdbID) ? (
+            <FaBookmark className="watchlist_icon" />
+          ) : (
+            <FaRegBookmark className="watchlist_icon" />
+          )}
+        </button>
+      </div>
     </div>
   );
 };

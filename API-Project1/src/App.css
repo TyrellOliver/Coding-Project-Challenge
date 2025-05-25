@@ -1,17 +1,13 @@
 .movie_card {
-  display: grid;
-  grid-template-areas:
-    "poster title title title"
-    "poster year year year"
-    "poster rate rate watchlist";
   border: 1px solid lightgrey;
+  align-items: center;
+  display: flex;
   padding: 3px;
-  width: 100%;
   height: auto;
+  width: 100%;
 }
 
 .poster_wrapper {
-  grid-area: poster;
   /* overflow: hidden; */
   /* border: 4px solid red; */
   width: 120px;
@@ -26,25 +22,22 @@
   height: 100%;
 }
 
-.movie_title {
-  grid-area: title;
-}
-
-.movie_year {
-  grid-area: year;
+.description_wrapper {
+    flex-direction: column;
+    padding-left: 10px;
+    display: flex;
 }
 
 .movie_watchlist_button {
-  /* grid-area: watchlist; */
   height: fit-content;
   width: fit-content;
   background: none;
   cursor: pointer;
   border: none;
-  /* padding: 0; */
+  padding: 0;
 }
 
 .watchlist_icon {
-  /* grid-area: watchlist; */
   height: 20px;
+  width: 100%;
 }
