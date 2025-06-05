@@ -6,8 +6,13 @@ import Movie from "./Movie";
 const API = import.meta.env.VITE_API_KEY;
 const type = "movie";
 
-const Search = ({ watchlist, handleWatchlistToggle }) => {
-  const [movies, setMovies] = useState([]);
+const Search = ({
+  watchlist,
+  handleWatchlistToggle,
+  handleMoviesSearch,
+  movies,
+}) => {
+  // const [movies, setMovies] = useState([]);
   const [search, setSearch] = useState("");
 
   const handleTextChange = (event) => {
@@ -24,7 +29,7 @@ const Search = ({ watchlist, handleWatchlistToggle }) => {
         .then((res) => res.json())
         .then((data) => {
           //   console.log(data.Search);
-          setMovies(data.Search);
+          handleMoviesSearch(data.Search);
         });
     } catch (error) {
       console.log("Error fetching movies", error);
@@ -32,9 +37,9 @@ const Search = ({ watchlist, handleWatchlistToggle }) => {
     }
   };
 
-  useEffect(() => {
-    localStorage.setItem("watchlistData", JSON.stringify(watchlist));
-  }, [watchlist]);
+  // useEffect(() => {
+  //   localStorage.setItem("watchlistData", JSON.stringify(watchlist));
+  // }, [watchlist]);
 
   return (
     <div className="search">

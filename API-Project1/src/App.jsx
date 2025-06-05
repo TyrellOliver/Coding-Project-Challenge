@@ -6,29 +6,41 @@ import Search from "./Search";
 import Watchlist from "./WatchList";
 
 function App() {
-  const [watchlist, setWatchlist] = useState([]);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [movies, setMovies] = useState([]);
+  const savedWatchlist = localStorage.getItem("watchlistData");
+  const parsedWatchlist = savedWatchlist ? JSON.parse(savedWatchlist) : [];
+  const [watchlist, setWatchlist] = useState(parsedWatchlist);
+  // const [isLoaded, setIsLoaded] = useState(false);
 
-  function handleWatchlistToggle(movie) {
-    if (watchlist.some((mov) => mov.imdbID === movie.imdbID)) {
-      setWatchlist(watchlist.filter((mov) => mov.imdbID !== movie.imdbID));
-    } else {
-      // setWatchlist([...watchlist, movie]);
-      setWatchlist((prev) => [...prev, movie]);
-    }
+  function handleMoviesSearch(data) {
+    setMovies(data);
   }
 
-  useEffect(() => {
-    const savedWatchlist = localStorage.getItem("watchlistData");
-    if (savedWatchlist) {
-      setWatchlist(JSON.parse(savedWatchlist));
+  function handleWatchlistToggle(movie) {
+    let newWatchlist = [];
+
+    if (watchlist.some((mov) => mov.imdbID === movie.imdbID)) {
+      newWatchlist = watchlist.filter((mov) => mov.imdbID !== movie.imdbID);
+      setWatchlist(newWatchlist);
+    } else {
+      newWatchlist = [...watchlist, movie];
+      // setWatchlist([...watchlist, movie]);
+      setWatchlist(newWatchlist);
     }
-    setIsLoaded(true);
-  }, []);
+    localStorage.setItem("watchlistData", JSON.stringify(newWatchlist));
+  }
+
+  // useEffect(() => {
+  //   const savedWatchlist = localStorage.getItem("watchlistData");
+  //   if (savedWatchlist) {
+  //     setWatchlist(JSON.parse(savedWatchlist));
+  //   }
+  //   // setIsLoaded(true);
+  // }, []);
 
   // console.log("The watchlist", watchlist);
 
-  if (!isLoaded) return <p>Loading...</p>;
+  // if (!isLoaded) return <p>Loading...</p>;
 
   return (
     <>
@@ -39,6 +51,8 @@ function App() {
               path="/"
               element={
                 <Search
+                  movies={movies}
+                  handleMoviesSearch={handleMoviesSearch}
                   watchlist={watchlist}
                   handleWatchlistToggle={handleWatchlistToggle}
                 />
