@@ -20,7 +20,15 @@ app.get("/", (req, res) => {
   res.send("Welcome to the home page");
 });
 
-io.on("connection", (socket) => {});
+io.on("connection", (socket) => {
+  // console.log(`User connected: ${socket.id}`)
+
+  socket.on("send_message", (data)=>{
+    console.log(data)
+  })
+});
+
+
 
 // httpServer.listen(3000);
 
