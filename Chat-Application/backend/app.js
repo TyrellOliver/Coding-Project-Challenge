@@ -15,24 +15,18 @@ const io = new Server(httpServer, {
   },
 });
 
-
 app.get("/", (req, res) => {
   res.send("Welcome to the home page");
 });
 
 io.on("connection", (socket) => {
-  // console.log(`User connected: ${socket.id}`)
+  console.log(`User connected: ${socket.id}`);
 
-  socket.on("send_message", (data)=>{
-    console.log(data)
-    // socket.emit("sent_message",(data)=>{
-
-    // })
+  socket.on("send_message", (data) => {
+    // console.log("sent message: ", data);
     socket.broadcast.emit("recevied_message", data);
-  })
+  });
 });
-
-
 
 // httpServer.listen(3000);
 
