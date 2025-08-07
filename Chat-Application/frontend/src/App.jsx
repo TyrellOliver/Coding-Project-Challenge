@@ -37,48 +37,58 @@ function App() {
   console.log(room);
 
   return (
-    <>
-      <div>
-        <p>Sent:</p>
-        {sentMessages.map((message, index) => (
-          <div key={index}>
-            <p>{message}</p>
-          </div>
-        ))}
+    <div>
+      <div className="sidebar">
+        <p>sidebar</p>
       </div>
-      <div>
-        <p>Received:</p>
+      <div className="message_area">
+        <div>
+          <p>Sent:</p>
+          {sentMessages.map((message, index) => (
+            <div key={index}>
+              <p>{message}</p>
+            </div>
+          ))}
+        </div>
+        <div>
+          <p>Received:</p>
 
-        {receivedMessages.map((message, index) => (
-          <div key={index}>
-            <p>{message}</p>
-          </div>
-        ))}
+          {receivedMessages.map((message, index) => (
+            <div key={index}>
+              <p>{message}</p>
+            </div>
+          ))}
+        </div>
+        <div>
+          <input
+            type="text"
+            placeholder="Message..."
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onKeyDown={(e) =>
+              e.key.toLowerCase() === "enter" ? handleOnClick() : ""
+            }
+          />
+          <button type="submit" onClick={handleOnClick}>
+            Send
+          </button>
+        </div>
+        <div>
+          <input
+            type="text"
+            placeholder="Room number..."
+            value={room}
+            onChange={(e) => setRoom(e.target.value)}
+            onKeyDown={(e) =>
+              e.key.toLowerCase() === "enter" ? joinRoom() : ""
+            }
+          />
+          <button type="submit" onClick={joinRoom}>
+            Send
+          </button>
+        </div>
       </div>
-      <input
-        type="text"
-        placeholder="Message..."
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        onKeyDown={(e) =>
-          e.key.toLowerCase() === "enter" ? handleOnClick() : ""
-        }
-      />
-      <button type="submit" onClick={handleOnClick}>
-        Send
-      </button>
-      <br />
-      <input
-        type="text"
-        placeholder="Room number..."
-        value={room}
-        onChange={(e) => setRoom(e.target.value)}
-        onKeyDown={(e) => (e.key.toLowerCase() === "enter" ? joinRoom() : "")}
-      />
-      <button type="submit" onClick={joinRoom}>
-        Send
-      </button>
-    </>
+    </div>
   );
 }
 
