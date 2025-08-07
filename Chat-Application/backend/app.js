@@ -23,8 +23,14 @@ io.on("connection", (socket) => {
   console.log(`User connected: ${socket.id}`);
 
   socket.on("send_message", (data) => {
-    // console.log("sent message: ", data);
-    socket.broadcast.emit("recevied_message", data);
+    console.log("sent message: ", data);
+    // socket.broadcast.emit("recevied_message", data);
+    socket.to(data.room).emit("recevied_message", data);
+  });
+
+  socket.on("join_room", (data) => {
+    console.log("The room is:", data);
+    socket.join(data);
   });
 });
 
