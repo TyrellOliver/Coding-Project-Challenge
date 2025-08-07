@@ -7,15 +7,22 @@ function App() {
   const [message, setMessage] = useState("");
   const [sentMessages, setSentMessages] = useState([]);
   const [receivedMessages, setReceivedMessages] = useState([]);
+  const [room, setRoom] = useState("");
 
   const handleOnClick = () => {
-    socket.emit("send_message", { message });
+    socket.emit("send_message", { message, room });
     setSentMessages((prev) => [...prev, message]);
     setMessage("");
   };
 
-  const handleTextChange = (e) => {
-    setMessage(e.target.value);
+  // const handleTextChange = (e) => {
+  //   setMessage(e.target.value);
+  //   setRoom(e.target.value);
+  // };
+
+  const joinRoom = () => {
+    socket.emit("join_room", room);
+    // setRoom("");
   };
 
   useEffect(() => {
@@ -26,6 +33,8 @@ function App() {
       socket.off("recevied_message");
     };
   }, [socket]);
+
+  console.log(room);
 
   return (
     <>
@@ -48,14 +57,25 @@ function App() {
       </div>
       <input
         type="text"
-        placeholder="Type your message..."
+        placeholder="Message..."
         value={message}
-        onChange={handleTextChange}
+        onChange={(e) => setMessage(e.target.value)}
         onKeyDown={(e) =>
           e.key.toLowerCase() === "enter" ? handleOnClick() : ""
         }
       />
       <button type="submit" onClick={handleOnClick}>
+        Send
+      </button>
+      <br />
+      <input
+        type="text"
+        placeholder="Room number..."
+        value={room}
+        onChange={(e) => setRoom(e.target.value)}
+        onKeyDown={(e) => (e.key.toLowerCase() === "enter" ? joinRoom() : "")}
+      />
+      <button type="submit" onClick={joinRoom}>
         Send
       </button>
     </>
