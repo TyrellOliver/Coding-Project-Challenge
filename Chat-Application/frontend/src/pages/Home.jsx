@@ -2,22 +2,20 @@ import { useState, useEffect } from "react";
 import io from "socket.io-client";
 const socket = io.connect("http://localhost:3025");
 
+const SELF = 0;
+const OTHER = 1;
 const Home = () => {
-  const [message, setMessage] = useState("");
-  const [sentMessages, setSentMessages] = useState([]);
-  const [receivedMessages, setReceivedMessages] = useState([]);
+  const [sentMessage, setSentMessage] = useState("");
+  // const [sentMessages, setSentMessages] = useState([]);
+  // const [receivedMessages, setReceivedMessages] = useState([]);
   const [room, setRoom] = useState("");
+  const [messages, setMessages] = useState([]);
 
   const handleOnClick = () => {
-    socket.emit("send_message", { message, room });
-    setSentMessages((prev) => [...prev, message]);
-    setMessage("");
+    socket.emit("send_message", { message: sentMessage, room });
+    setMessages((prev) => [...prev, { text: sentMessage, sender: SELF }]);
+    setSentMessage("");
   };
-
-  // const handleTextChange = (e) => {
-  //   setMessage(e.target.value);
-  //   setRoom(e.target.value);
-  // };
 
   const joinRoom = () => {
     socket.emit("join_room", room);
@@ -26,50 +24,49 @@ const Home = () => {
 
   useEffect(() => {
     socket.on("recevied_message", (data) => {
-      setReceivedMessages((prev) => [...prev, data.message]);
+      setMessages((prev) => [...prev, { text: data.message, sender: OTHER }]);
     });
     return () => {
       socket.off("recevied_message");
     };
   }, [socket]);
 
+  // console.log(sentMessages);
+  // console.log(receivedMessages);
   console.log(room);
+  console.log(messages);
   return (
     <div className="message_area">
       <div className="message_container">
-        <div className="sent_message">
-          <p>Sent:</p>
-          {sentMessages.map((message, index) => (
+        <div className={``}>
+          {messages.map((message, index) => (
             <div key={index}>
-              <p>{message}</p>
-            </div>
-          ))}
-        </div>
-        <div className="received_message">
-          <p>Received:</p>
-
-          {receivedMessages.map((message, index) => (
-            <div key={index}>
-              <p>{message}</p>
+              <p>
+                {message.sender === OTHER ? "Other: " : "You: "}
+                {message.text}
+              </p>
             </div>
           ))}
         </div>
       </div>
+
       <footer>
         <div className="message_input">
           <input
             type="text"
             placeholder="Message..."
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
+            value={sentMessage}
+            onChange={(e) => setSentMessage(e.target.value)}
             onKeyDown={(e) =>
               e.key.toLowerCase() === "enter" ? handleOnClick() : ""
             }
           />
+
           <button type="submit" onClick={handleOnClick}>
             Send
           </button>
         </div>
+
         <div className="room_num">
           <input
             type="text"
@@ -80,6 +77,7 @@ const Home = () => {
               e.key.toLowerCase() === "enter" ? joinRoom() : ""
             }
           />
+
           <button type="submit" onClick={joinRoom}>
             Send
           </button>
